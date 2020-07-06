@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const YoutubeMp3Downloader = require("youtube-mp3-downloader");
 
 var YD = new YoutubeMp3Downloader({
-    "ffmpegPath": `${ process.env.PATH || '/ffmpeg/ffmpeg'}`,        // Where is the FFmpeg binary located?
+    "ffmpegPath": `${ process.env.PATH+'../../../../../' || '/ffmpeg/ffmpeg'}`,        // Where is the FFmpeg binary located?
     "outputPath": `${path.join(__dirname, '..', 'mp3')}`,    // Where should the downloaded and encoded files be stored?
     "youtubeVideoQuality": "highest",       // What video quality should be used?
     "queueParallelism": 2,                  // How many parallel downloads/encodes should be started?
