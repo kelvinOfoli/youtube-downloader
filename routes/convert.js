@@ -2,10 +2,12 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+
+const appPath = require('../utilities/path')
 const YoutubeMp3Downloader = require("youtube-mp3-downloader");
 
 var YD = new YoutubeMp3Downloader({
-    "ffmpegPath": `${ process.env.FFMPEG || '/ffmpeg/ffmpeg'}`,        // Where is the FFmpeg binary located?
+    "ffmpegPath": `${ appPath || '/ffmpeg/ffmpeg'}`,        // Where is the FFmpeg binary located?
     "outputPath": `${path.join(__dirname, '..', 'mp3')}`,    // Where should the downloaded and encoded files be stored?
     "youtubeVideoQuality": "highest",       // What video quality should be used?
     "queueParallelism": 2,                  // How many parallel downloads/encodes should be started?
@@ -34,10 +36,10 @@ router.use("/convert", (req, res, next) => {
     YD.on("finished", function (err, data) {
     console.log(`Finished : ${data.title}`);
             
-        app.set('downloadData', data);
+        // app.set('downloadData', data);
         // const filePath = data.file;
         // res.download(filePath);
-       return res.render('home',{layout: false, downloadData: app.get('downloadData')});
+       return res.render('home',{layout: false, downloadData: data});
     });
 
     YD.on("error", function (error) {
