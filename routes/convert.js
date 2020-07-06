@@ -3,11 +3,10 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const appPath = require('../utilities/path')
 const YoutubeMp3Downloader = require("youtube-mp3-downloader");
 
 var YD = new YoutubeMp3Downloader({
-    "ffmpegPath": `${ appPath || '/ffmpeg/ffmpeg'}`,        // Where is the FFmpeg binary located?
+    "ffmpegPath": `${ path.dirname(require.main.filename) || '/ffmpeg/ffmpeg'}`,        // Where is the FFmpeg binary located?
     "outputPath": `${path.join(__dirname, '..', 'mp3')}`,    // Where should the downloaded and encoded files be stored?
     "youtubeVideoQuality": "highest",       // What video quality should be used?
     "queueParallelism": 2,                  // How many parallel downloads/encodes should be started?
