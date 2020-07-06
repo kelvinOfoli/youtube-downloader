@@ -8,6 +8,9 @@ const aboutRoutes = require('./routes/about');
 const covertRoutes = require('./routes/convert');
 const notFoundRoute = require('./routes/404');
 const expresshbs = require("express-handlebars");
+const dotenv = require('dotenv')
+
+dotenv.config({ path : './config/config.env'})
 
 const app = express();
 
