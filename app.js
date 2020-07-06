@@ -28,4 +28,4 @@ app.use(homeRoutes);
 app.use(notFoundRoute);
 
 const server = http.createServer(app);
-server.listen(3000); 
+server.listen(process.env.PORT || 3000); 
