@@ -12,11 +12,8 @@ var YD = new YoutubeMp3Downloader({
     "progressTimeout": 2000                 // How long should be the interval of the progress reports
 });
 
-
-
+const app = express();
 const router = express.Router();
-
-
 router.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -25,14 +22,22 @@ function youtube_parser(url) {
     return (url.match(regExp)[1])
 }
 
-router.use('/convert', (req, res, next) => {
+router.get("/convert/download",(req,res)=>{
+    res.download(app.get('downloadData').file);
+})
+
+router.use("/convert", (req, res, next) => {
     const url = req.body.url;
 
     YD.download(youtube_parser(url));
 
     YD.on("finished", function (err, data) {
-        const filePath = data.file;
-        res.download(filePath);
+    console.log(`Finished : ${data.title}`);
+            
+        app.set('downloadData', data);
+        // const filePath = data.file;
+        // res.download(filePath);
+       return res.render('home',{layout: false, downloadData: app.get('downloadData')});
     });
 
     YD.on("error", function (error) {
@@ -40,11 +45,11 @@ router.use('/convert', (req, res, next) => {
     });
 
     YD.on("progress", function (progress) {
-
-        console.log(progress.progress.percentage);
-
+        // console.log(JSON.stringify(progress));
     });
-    
 })
+
+
+
 
 module.exports = router

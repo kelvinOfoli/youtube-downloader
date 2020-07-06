@@ -37,25 +37,39 @@
         </header>
 
         <main class="px-3">
-            <h1>Youtube Loader</h1>
-            <p style="color:cadetblue;">Convert Youtube videos into mp3 format</p>
-            <div id='alert'></div>
-            <form action="/convert" method="POST">
-                <input type="text" class="form-control" name="url" placeholder="Please insert valid video URL">
-                <!-- <br/>
-        
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-                        aria-valuemax="100"></div>
-                </div> -->
+            {{#if downloadData}}
+
+             {{ else }}
+                <h1>Youtube Loader</h1>
+                <p style="color:cadetblue;">Convert Youtube videos into mp3 format</p>
+                <div id='alert'></div>
+                <form action="/convert" method="POST">
+                    <input type="text" class="form-control" name="url" placeholder="Please insert valid video URL">
 
 
-                </br>
-                <button type="submit" class="btn btn-danger">Convert</button>
-            </form>
+
+                    </br>
+                    <button type="submit" class="btn btn-danger">Convert</button>
+
+
+                </form>
+            {{/if}}
+
             <br>
             <div class="container" style="width: 25rem; background-color: inherit;">
-               
+                {{#if downloadData}}
+                    <div class="row">
+                        <div class="col-sm">
+                            <img src="{{downloadData.thumbnail}}" class="card-img-top" alt="...">
+                            <p>{{downloadData.videoTitle}}</p>
+
+                            <!-- <p class="card-text">file name</p> -->
+                            <a href="/convert/download" class="btn btn-success">Download MP3</a>
+                            <a href="/" class="btn btn-warning">Convert again</a>
+                        </div>
+
+                    </div>
+                {{/if}}
             </div>
         </main>
 
@@ -63,8 +77,6 @@
             <p>Copyright &copy; 2020. All rights reserved</p>
         </footer>
     </div>
-
-
     <script src="main.js"></script>
 </body>
 
