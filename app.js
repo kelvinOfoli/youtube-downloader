@@ -16,7 +16,7 @@ const app = express();
 
 app.engine('hbs', expresshbs());
 app.set('view engine', 'hbs');
-app.set('views', 'views'); // default
+app.set('views', 'views_'); // default
 
 //Middlewares
 // app.use(bodyParser.urlencoded({extended: false}));
