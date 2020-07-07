@@ -1,4 +1,5 @@
 const path = require('path');
+const  fs = require('fs');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -23,8 +24,17 @@ function youtube_parser(url) {
     return (url.match(regExp)[1])
 }
 
+function deleteFile (file){
+    setTimeout(()=>{
+        fs.unlinkSync(file);
+        console.log('File Deleted')
+    },300000) // delete file timeout
+}
+
 router.get("/convert/download",(req,res)=>{
-    res.download(app.get('downloadData').file);
+    const file = app.get('downloadData').file
+    res.download(file);
+    deleteFile(file);
 })
 
 router.use("/convert", (req, res, next) => {
