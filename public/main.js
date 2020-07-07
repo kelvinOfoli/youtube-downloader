@@ -29,11 +29,11 @@ function inputValidator (e){
     try {
         const url = youtube_parser(document.querySelector('.form-control').value);
         validVideoId(url)
-        console.log(url);
+        // console.log(url);
     } catch{
         e.preventDefault();
         errorAlert('Invalid YouTube URL');
     }
 }
 
-document.querySelector('.btn').addEventListener('click', inputValidator);
+document.getElementById('covert-button').addEventListener('click', inputValidator);

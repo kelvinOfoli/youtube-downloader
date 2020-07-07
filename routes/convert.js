@@ -35,7 +35,7 @@ router.use("/convert", (req, res, next) => {
     YD.on("finished", function (err, data) {
     console.log(`Finished : ${data.title}`);
             
-        // app.set('downloadData', data);
+        app.set('downloadData', data);
         // const filePath = data.file;
         // res.download(filePath);
        return res.render('home',{layout: false, downloadData: data});
